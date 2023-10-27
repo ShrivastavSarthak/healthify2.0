@@ -1,11 +1,20 @@
-
 import './App.css';
 
+import { motion, useScroll } from 'framer-motion'
+import Home from './pages/Home';
+import { Fragment } from 'react';
 function App() {
+
+  const { scrollYProgress } = useScroll();
+
   return (
-    <div className="App">
-     <h1>holaa!!</h1>
-    </div>
+    <Fragment className="App">
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
+      <Home />
+    </Fragment>
   );
 }
 
