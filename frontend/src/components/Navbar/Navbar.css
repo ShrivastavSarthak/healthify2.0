@@ -1,0 +1,25 @@
+/*  */
+div.logo {
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Belanosima', sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    list-style: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5em;
+    margin-bottom: 0;
+}
+.navlist:hover {
+    color: rgb(30, 31, 32);
+    padding: 0.5em;
+    text-shadow: 2px 2px 5px rgb(99, 88, 88);
+    text-decoration: underline;
+
+}

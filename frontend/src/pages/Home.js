@@ -1,14 +1,8 @@
 import React, { Fragment } from 'react'
 import { Image, Card } from 'antd'
 import { motion} from 'framer-motion'
-
-
-
 import "./Home.css"
 const Home = () => {
- 
-
-
   return (
     <Fragment>
       <center className='mx-3'>
