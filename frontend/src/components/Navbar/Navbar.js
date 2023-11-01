@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Layout, theme,Button,Menu } from 'antd';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
@@ -12,6 +12,18 @@ import NavList from '../Nav-List/NavList';
 const { Header, Sider, Content } = Layout;
 
 const Navbar = () => {
+  const [isMobile,setIsMobile] =useState(false);
+
+  useEffect(()=>{
+    const handleResize = () =>{
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    return ()=>{
+      window.removeEventListener('resize',handleResize);
+    };
+  },[])
+
   const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
@@ -19,7 +31,7 @@ const Navbar = () => {
   return (
     <>
 
-    <Layout className='navbar'>
+    <Layout className='layout'>
     <Sider trigger={null} collapsible collapsed={collapsed}   collapsedWidth="0" bodyBg="#F5F5F5">
     <Menu
           theme="dark"
@@ -43,19 +55,19 @@ const Navbar = () => {
             },
           ]}
         />
-    </Sider>      <Button
+    </Sider>      <Button className='my-auto mx-3'
             type="text"
             icon={collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: '16px',
-              height: 64,
+              height: 54,
             }}
           />
 
 {/* <NavList/> */}
-    <div className="left logo"> Healthify</div>
-    <div className="navbar right" style={{width:"50%"}}> 
+    <div className="left logo my-auto"> Healthify</div>
+    <div className={ isMobile ? "hidden-on-mobile" : "navbar mx-auto"} style={{width:"50%"}}> 
       <div className="navlist">Home</div>
       <div className="navlist">About</div>
       <div className="navlist">Services</div></div>
