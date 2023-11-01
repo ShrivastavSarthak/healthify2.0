@@ -1,0 +1,39 @@
+/*  */
+div.logo {
+    font-size: 2.5em;
+    text-align: center;
+    font-family: 'Belanosima', sans-serif;
+    margin: 0;
+    color: #FAC63B;
+}
+
+.navbar {
+    list-style: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0em;
+    margin-bottom: 0;
+    color: #3D8FC5;
+}
+
+.navlist:hover {
+    color:rgb(250, 198, 59);
+    padding: 0.5em;
+    text-shadow: 2px 2px 5px rgb(213, 211, 85);
+}
+.hidden-on-mobile {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0em;
+    margin-bottom: 0;
+}
+  @media screen and (max-width: 850px) {
+    .hidden-on-mobile {
+      display: none;
+    }
+  }

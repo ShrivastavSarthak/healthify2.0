@@ -1,0 +1,18 @@
+.card-content{
+ font-family: 'Belanosima', sans-serif;
+ color: #3D8FC5;
+ }
+.righty{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.intro{
+    font-size: larger;
+}
+@media screen and (max-width: 750px) {
+  .intro{
+    font-weight: 100;
+  }  
+} 
