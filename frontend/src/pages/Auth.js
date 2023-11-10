@@ -3,8 +3,11 @@ import React, { Fragment, useState } from 'react'
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import ClockCircleOutlined from '@ant-design/icons/ClockCircleOutlined';
 import { Message } from '../UIElements/message';
+import { useNavigate } from 'react-router-dom'
 import userInput from '../hooks/user-input-hook';
 import useInput from '../hooks/user-input-hook';
+
+
 
 const Auth = () => {
     const [open, setOpen] = useState(false)
@@ -13,6 +16,7 @@ const Auth = () => {
         setOpen(true)
     }
 
+    const navigate = useNavigate()
 
     const {
         value: enteredName,
@@ -53,17 +57,27 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        navigate('/dashboard')
+
         resetNameInput()
         resetEmailInput()
         resetPasswordInput()
         resetCPasswordInput()
+        setOpen(false)
     }
 
-    let checked = false
+    let checkedSign = false
+
+    let checkedlog = false
 
     if (enteredNameIsValid && enteredEmailIsValid && enteredPasswordIsValid && enteredCPasswordIsValid) {
-        checked = true
+        checkedSign = true
     }
+
+    if (enteredEmailIsValid && enteredPasswordIsValid) (
+        checkedlog = true
+    )
 
     return (
         <Fragment>
@@ -89,7 +103,7 @@ const Auth = () => {
                             prefix={NameInputHasError ? <ClockCircleOutlined /> : <UserOutlined />}
                         />}
                     {
-                        reg && NameInputHasError && <Message mess={'name should be 3 words.'}/>
+                        reg && NameInputHasError && <Message mess={'name should be 3 words.'} />
                     }
 
                     <Input
@@ -104,35 +118,35 @@ const Auth = () => {
                         prefix={EmailInputHasError ? <ClockCircleOutlined /> : "@"}
                     />
                     {
-                        EmailInputHasError && <Message mess={"Email should not be empty"}/>
+                        EmailInputHasError && <Message mess={"Email should not be empty"} />
                     }
                     <Input.Password
                         value={enteredPassword}
                         onBlur={PasswordBlurHandler}
                         onChange={PasswordChangeHandler}
-                        status={PasswordInputHasError&& "error"}
+                        status={PasswordInputHasError && "error"}
                         className='mb-3'
                         size='default size'
                         placeholder='Enter your Password'
                         iconRender={(visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />))}
                     />
                     {
-                        PasswordInputHasError && <Message mess={"Password length must be 6 characters."}/>
+                        PasswordInputHasError && <Message mess={"Password length must be 6 characters."} />
                     }
                     {reg &&
                         <Input.Password
-                        value={enteredCPassword}
-                        onBlur={CPasswordBlurHandler}
-                        onChange={CPasswordChangeHandler}
-                        status={CPasswordInputHasError && "error"}
+                            value={enteredCPassword}
+                            onBlur={CPasswordBlurHandler}
+                            onChange={CPasswordChangeHandler}
+                            status={CPasswordInputHasError && "error"}
                             className='mb-3'
                             size='default size'
                             placeholder='Re-enter your Password'
                             iconRender={(visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />))}
                         />}
-                        {
-                            reg && CPasswordInputHasError && <Message mess={"Password not matched."}/>
-                        }
+                    {
+                        reg && CPasswordInputHasError && <Message mess={"Password not matched."} />
+                    }
                 </center>
                 <Flex justify={!reg ? "flex-end" : 'space-between'} >
                     {reg &&
@@ -140,7 +154,12 @@ const Auth = () => {
                     <Button className='mt-2' size='small' onClick={() => (setReg(!reg))}>{reg ? "Have Account ?" : "New user ?"}</Button>
                 </Flex>
                 <center>
-                    <Button disabled={!checked} className='my-3' size='large' onClick={handleSubmit}>{reg ? "Signup" : "Login"}</Button>
+                    {
+                        reg ? <Button disabled={!checkedSign} className='my-3' size='large' onClick={handleSubmit}>Signup</Button> :
+                            <Button disabled={!checkedlog} className='my-3' size='large' onClick={handleSubmit}>Login</Button>
+                    }
+
+
                 </center>
             </Modal>
         </Fragment>
