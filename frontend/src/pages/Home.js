@@ -1,10 +1,20 @@
 import React, { Fragment } from "react";
-import { Image, Card } from "antd";
+import { Image, Card, Statistic } from "antd";
 import { motion } from "framer-motion";
+import CountUp from 'react-countup';
 import "./Home.css";
+import BmiCalculator from "../components/BMI/BmiCalculator";
+
 const { Meta } = Card;
 
 const Home = () => {
+
+
+  
+const formatter = (value) => <CountUp end={value} separator="," />;
+
+
+
   return (
     <Fragment>
       <center className="mx-3">
@@ -31,7 +41,7 @@ const Home = () => {
               >
 
                
-                  <Card className="p-3 card-content my-auto " hoverable>
+                  <Card className="p-3 card-content my-auto mt-4" hoverable>
                     <h2>Welcome to the </h2>
                     <h1
                       style={{
@@ -46,6 +56,7 @@ const Home = () => {
                       Discover personalized health insights, track your progress,
                       and achieve your wellness goals effortlessly."
                     </p>
+                    <Statistic title="Current active users" value={11234} precision={2} formatter={formatter}/>
                   </Card>
              
               </motion.div>
@@ -143,7 +154,11 @@ const Home = () => {
               transition={{ delay: 0.5 }}
             >
               <Card hoverable>
-                <h1>another stuff</h1>
+                <h1>Why us</h1>
+                <p>
+                  Because the main purpose of finding the best treatment of you are main purpose of us.
+                </p>
+                <BmiCalculator/>
               </Card>
             </motion.div>
           </motion.div>

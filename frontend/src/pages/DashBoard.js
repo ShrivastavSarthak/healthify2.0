@@ -1,8 +1,14 @@
-import React from 'react'
+
+import React, { Fragment } from 'react'
+import Slider from '../components/Slider/Slider'
 
 const DashBoard = () => {
   return (
-    <div>DashBoard</div>
+    <Fragment>
+      <Slider/>
+      
+      
+    </Fragment>
   )
 }
 

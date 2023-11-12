@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Modal } from 'antd'
+import { Button, Flex, Input } from 'antd'
 import React, { Fragment, useState } from 'react'
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import ClockCircleOutlined from '@ant-design/icons/ClockCircleOutlined';
@@ -6,14 +6,15 @@ import { Message } from '../UIElements/message';
 import { useNavigate } from 'react-router-dom'
 import userInput from '../hooks/user-input-hook';
 import useInput from '../hooks/user-input-hook';
+import CreateModal from '../UIElements/CreateModal';
 
 
 
 const Auth = () => {
-    const [open, setOpen] = useState(false)
+    const [open, setIsOpen] = useState(false)
     const [reg, setReg] = useState(true)
     const handleClick = () => {
-        setOpen(true)
+        setIsOpen(true)
     }
 
     const navigate = useNavigate()
@@ -64,7 +65,7 @@ const Auth = () => {
         resetEmailInput()
         resetPasswordInput()
         resetCPasswordInput()
-        setOpen(false)
+        setIsOpen(false)
     }
 
     let checkedSign = false
@@ -81,11 +82,11 @@ const Auth = () => {
 
     return (
         <Fragment>
-            <Button onClick={handleClick}> Login/Signup</Button>
-            <Modal
+            <Button onClick={handleClick}>Login/Signup</Button>
+            <CreateModal
                 open={open}
-                onSubmit={() => setOpen(false)}
-                onCancel={() => { setOpen(false) }}
+                onSubmit={() => setIsOpen(false)}
+                onCancel={() => setIsOpen(false)}
                 width={400}
                 footer={null}>
                 <center>
@@ -161,7 +162,7 @@ const Auth = () => {
 
 
                 </center>
-            </Modal>
+            </CreateModal>
         </Fragment>
     )
 }
