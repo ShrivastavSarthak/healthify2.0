@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, theme, Button } from 'antd';
-
+import { Layout, theme,Flex } from 'antd';
+import { HashLink } from "react-router-hash-link"
 
 import "./Navbar.css"
 import Auth from '../../pages/Auth';
@@ -27,11 +27,12 @@ const Navbar = () => {
 
       <Layout className='fixed-top ' style={{ background: colorBgContainer }}>
         <Header className={isMobile ? "d-flex p-0" : " navbar p-0  my-auto "} >
+        <Flex gap="large">
           <h1 className="logo my-auto ">Healthify</h1>
-
-          <Button className='hideContent navlist' type='link' size='large' >Home</Button>
-          <Button className='hideContent navlist' type='link' size='large'>About</Button>
-          <Button className='hideContent navlist' type='link' size='large'>Services</Button>
+            <HashLink className='hideContent navlist ' smooth to="/#Home" >Home</HashLink>
+            <HashLink className='hideContent navlist' smooth to="/#services">Services</HashLink>
+            <HashLink className='hideContent navlist' smooth to="/#about">About</HashLink>
+          </Flex>
           <div className='ms-auto p-2'>
             <Auth />
           </div>

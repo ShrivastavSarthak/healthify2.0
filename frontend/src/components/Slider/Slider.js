@@ -9,8 +9,9 @@ const Slider = () => {
     const { Sider } = Layout
     return (
         <Fragment>
-            <Sider trigger={null} collapsedWidth="0" bodyBg="#F5F5F5">
+            <Sider className='mt-5 ' trigger={null} collapsedWidth="0" bodyBg="#F5F5F5">
                 <Menu
+                    className='pt-4'
                     theme="dark"
                     mode="inline"
                     defaultSelectedKeys={['1']}

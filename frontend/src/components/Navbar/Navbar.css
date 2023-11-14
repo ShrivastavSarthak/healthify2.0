@@ -6,6 +6,12 @@
     color: #FAC63B;
 }
 
+.navlist{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  
+}
 
 .navlist:hover {
     color:  rgb(250, 198, 59);
