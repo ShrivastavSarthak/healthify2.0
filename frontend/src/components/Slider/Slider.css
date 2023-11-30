@@ -1,0 +1,9 @@
+.Button {
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Button:hover {
+  color: #fac63b;
+}

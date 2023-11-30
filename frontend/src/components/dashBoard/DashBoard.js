@@ -1,13 +1,12 @@
-
 import React, { Fragment } from 'react'
-import Slider from '../components/Slider/Slider'
 
 const DashBoard = () => {
   return (
     <Fragment>
-      <Slider/>
-      
-      
+        <center>
+            <h3>Welcome "Your name"</h3>
+        </center>
+    
     </Fragment>
   )
 }
