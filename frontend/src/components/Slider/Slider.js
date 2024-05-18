@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Button, Drawer, Flex } from "antd";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import "./Slider.css"
+import "./Slider.css";
 const Slider = () => {
   // const isMobile = useMobile();
   const [open, setIsOpen] = useState(false);
@@ -14,12 +14,12 @@ const Slider = () => {
   return (
     <Fragment>
       <Button
-        className="mt-3 ms-2"
+        className="my-3 ms-2"
         size
         type="primary"
         onClick={setDrawer}
         icon={!open ? <MenuOutlined /> : <CloseOutlined />}
-      />
+      />{" "}
       <Drawer
         style={{
           backgroundColor: "#001529",
@@ -33,12 +33,21 @@ const Slider = () => {
         open={open}
       >
         <Flex vertical={true}>
-          <Link className="p-1 mt-2 mx-2 Button">Dashboard</Link>
-          <Link className="p-1 mt-2 mx-2 Button">Apointment</Link>
-          <Link className="p-1 mt-2 mx-2 Button">schedule</Link>
-          <Link className="p-1 mt-2 mx-2 Button">Doctors</Link>
-        </Flex>
-      </Drawer>
+          <Link to={"/dashboard"} className="p-1 mt-2 mx-2 Button ">
+            {" "}
+            Dashboard{" "}
+          </Link>{" "}
+          <Link to={"/appointment"} className="p-1 mt-2 mx-2 Button">
+            {" "}
+            Appointment{" "}
+          </Link>{" "}
+          <Link className="p-1 mt-2 mx-2 Button"> schedule </Link>{" "}
+          <Link to={"/doctors"} className="p-1 mt-2 mx-2 Button">
+            {" "}
+            Doctors{" "}
+          </Link>{" "}
+        </Flex>{" "}
+      </Drawer>{" "}
     </Fragment>
   );
 };

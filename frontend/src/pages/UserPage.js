@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Layout } from "antd";
-import DashBoard from "../components/dashBoard/DashBoard";
+import DashBoard from "../components/dashBoard/DashBoard.js";
 
 const UserPage = () => {
   const { Content } = Layout;
@@ -8,9 +8,9 @@ const UserPage = () => {
     <Fragment>
       <Layout hasSider>
         <Content className="pt-5 mt-4">
-          <DashBoard/>
-        </Content>
-      </Layout>
+          <DashBoard />
+        </Content>{" "}
+      </Layout>{" "}
     </Fragment>
   );
 };

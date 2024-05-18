@@ -1,4 +1,4 @@
-import React, { useContext, } from "react";
+import React, { useContext } from "react";
 import { Button, Layout, theme } from "antd";
 import "./Navbar.css";
 import Auth from "../../pages/Auth";
@@ -20,15 +20,14 @@ const Navbar = () => {
         <Header className={mobileView ? "d-flex p-0" : " navbar p-0  my-auto "}>
           <NavLinks />
           <div className="ms-auto p-2">
-          {
-            !auth.isLoggedIn && <Auth />  
-          }
-          {
-            auth.isLoggedIn && <Button onClick={()=>auth.logout()} >logout</Button>
-          }
-          </div>
-        </Header>
-      </Layout>
+            {" "}
+            {!auth.isLoggedIn && <Auth />}{" "}
+            {auth.isLoggedIn && (
+              <Button onClick={() => auth.logout()}> logout </Button>
+            )}{" "}
+          </div>{" "}
+        </Header>{" "}
+      </Layout>{" "}
     </>
   );
 };

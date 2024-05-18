@@ -12,12 +12,14 @@ import userInput from "../hooks/user-input-hook";
 import useInput from "../hooks/user-input-hook";
 import CreateModal from "../UIElements/CreateModal";
 import { AuthContext } from "../shared/context/auth-context";
+// import { usePatientLoginMutation } from "../lib/services/patient.service.js";
+import axios from "axios";
 
 const User_Data = [
   {
     id: "u1",
     name: "John",
-    email: "john.mckinley@examplepetstore.com",
+    email: "test@test.com",
     password: "123456",
     cpassword: "123456",
   },
@@ -45,6 +47,8 @@ const User_Data = [
 ];
 
 const Auth = () => {
+  // const [loginMutation] = usePatientLoginMutation();
+
   const [open, setIsOpen] = useState(false);
   const [reg, setReg] = useState(true);
 
@@ -91,24 +95,40 @@ const Auth = () => {
     reset: resetCPasswordInput,
   } = useInput((value) => value === enteredPassword);
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     let isValidUser = false;
-    let userId
-    User_Data.find((user) => {
-      if (user.email === enteredEmail && user.password === enteredPassword) {
+    let userId;
+    // const userData = {
+
+    // };
+
+    // console.log(userData);
+    await axios
+      .post("http://localhost:5000/api/v1/patient/signin", {
+        email: enteredEmail,
+        password: enteredPassword,
+      })
+      .then(function (response) {
+        localStorage.setItem("token", response.data.token);
         auth.login();
-        userId=user.id
-        isValidUser = true;
-        return true;
-      }
-      return false;
-    });
-    if (isValidUser) {
-      navigate(`/dashboard/${userId}`);
-    } else {
-      <Message mess="user is not authincate." />;
-    }
+        navigate("/dashboard");
+      });
+
+    // User_Data.find((user) => {
+    //   if (user.email === enteredEmail && user.password === enteredPassword) {
+    //     auth.login();
+    //     userId = user.id;
+    //     isValidUser = true;
+    //     return true;
+    //   }
+    //   return false;
+    // });
+    // if (isValidUser) {
+
+    // } else {
+    //   <Message mess="user is not authenticate." />;
+    // }
 
     resetNameInput();
     resetEmailInput();
@@ -145,7 +165,7 @@ const Auth = () => {
 
   return (
     <Fragment>
-       <Button onClick={handleClick}>Login/Signup</Button>  
+      <Button onClick={handleClick}> Login / Signup </Button>{" "}
       <CreateModal
         open={open}
         onSubmit={() => setIsOpen(false)}
@@ -154,7 +174,7 @@ const Auth = () => {
         footer={null}
       >
         <center>
-          <h1 className="my-3">{reg ? "Signup" : "Login"}</h1>
+          <h1 className="my-3"> {reg ? "Signup" : "Login"} </h1>{" "}
           {reg && (
             <Input
               value={enteredName}
@@ -169,11 +189,10 @@ const Auth = () => {
                 NameInputHasError ? <ClockCircleOutlined /> : <UserOutlined />
               }
             />
-          )}
+          )}{" "}
           {reg && NameInputHasError && (
             <Message mess={"name should be 3 words."} />
-          )}
-
+          )}{" "}
           <Input
             value={enteredEmail}
             onBlur={EmailBlurHandler}
@@ -184,8 +203,8 @@ const Auth = () => {
             placeholder="Enter your Email"
             type="Email"
             prefix={EmailInputHasError ? <ClockCircleOutlined /> : "@"}
-          />
-          {EmailInputHasError && <Message mess={"Email should not be empty"} />}
+          />{" "}
+          {EmailInputHasError && <Message mess={"Email should not be empty"} />}{" "}
           <Input.Password
             value={enteredPassword}
             onBlur={PasswordBlurHandler}
@@ -197,10 +216,10 @@ const Auth = () => {
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
-          />
+          />{" "}
           {PasswordInputHasError && (
             <Message mess={"Password length must be 6 characters."} />
-          )}
+          )}{" "}
           {reg && (
             <Input.Password
               value={enteredCPassword}
@@ -214,23 +233,25 @@ const Auth = () => {
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
               }
             />
-          )}
+          )}{" "}
           {reg && CPasswordInputHasError && (
             <Message mess={"Password not matched."} />
-          )}
-        </center>
+          )}{" "}
+        </center>{" "}
         <Flex justify={!reg ? "flex-end" : "space-between"}>
+          {" "}
           {reg && (
             <Button size="small" className="mt-2">
               Forget password ?
             </Button>
-          )}
+          )}{" "}
           <Button className="mt-2" size="small" onClick={() => setReg(!reg)}>
-            {reg ? "Have Account ?" : "New user ?"}
-          </Button>
-        </Flex>
-
+            {" "}
+            {reg ? "Have Account ?" : "New user ?"}{" "}
+          </Button>{" "}
+        </Flex>{" "}
         <center>
+          {" "}
           {reg ? (
             <Button
               disabled={!checkedSign}
@@ -239,7 +260,7 @@ const Auth = () => {
               size="large"
               onClick={handleSignupSubmit}
             >
-              Signup
+              Signup{" "}
             </Button>
           ) : (
             <Button
@@ -249,11 +270,11 @@ const Auth = () => {
               size="large"
               type="primary"
             >
-              Login
+              Login{" "}
             </Button>
-          )}
-        </center>
-      </CreateModal>
+          )}{" "}
+        </center>{" "}
+      </CreateModal>{" "}
     </Fragment>
   );
 };
