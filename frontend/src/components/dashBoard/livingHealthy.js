@@ -14,19 +14,19 @@ const data = [
   {
     title: "Diet & weight",
     Image:
-      "https://cdn.pixabay.com/photo/2024/03/13/12/45/woman-8630961_1280.jpg",
-    url: "/dietandweight",
+      "https://plus.unsplash.com/premium_vector-1682269712686-70cad049d2b8?bg=FFFFFF&w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RElFVHxlbnwwfHwwfHx8MA%3D%3D",
+    url: "/dietmanage",
   },
   {
     title: "healthy aging",
     Image:
-      "https://cdn.pixabay.com/photo/2024/03/13/12/45/woman-8630961_1280.jpg",
-    url: "",
+      "https://plus.unsplash.com/premium_vector-1682310614126-4c5193a48b3d?bg=FFFFFF&w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGh1bWFufGVufDB8fDB8fHww",
+    url: "/healthyaging",
   },
   {
-    title: "FItness and exercise",
+    title: "Fitness",
     Image:
-      "https://cdn.pixabay.com/photo/2024/03/13/12/45/woman-8630961_1280.jpg",
+      "https://plus.unsplash.com/premium_vector-1714663293500-874408dcd60c?bg=FFFFFF&w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGZpdG5lc3MlMjBhbmQlMjBleGVjaXNlfGVufDB8fDB8fHww",
     url: "/exercise",
   },
 ];

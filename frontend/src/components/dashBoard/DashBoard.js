@@ -83,7 +83,7 @@ const DashBoard = () => {
             </motion.div>{" "}
           </div>{" "}
         </button>{" "}
-        <button onClick={() => navigate("/dietandweight")}>
+        <button onClick={() => navigate("/dietmanage")}>
           <div className=" grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1">
             <div className="overflow-hidden">
               <motion.div
@@ -107,8 +107,7 @@ const DashBoard = () => {
             >
               <h3 className=" font-bold text-md text-start">
                 {" "}
-                THe Health benefits of berries{" "}
-              </h3>{" "}
+Want to have benifits of good food?   </h3>{" "}
             </motion.div>{" "}
           </div>{" "}
         </button>{" "}
