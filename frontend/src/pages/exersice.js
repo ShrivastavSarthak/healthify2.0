@@ -117,58 +117,35 @@ function ExercisePage() {
         }
     };
 
-    return ( <
-        div className = "container mx-auto my-[6%]" >
-        <
-        h1 className = "mb-10 text-5xl font-semibold text-[#001529] text-center" >
-        Exercises that help you get in shape { " " } <
-        /h1>{" "} <
-        center >
-        <
-        div className = "flex  justify-center gap-3 items-center w-[50%] " >
-        <
-        Input onChange = {
+    return ( <div className = "container mx-auto my-[6%]" >
+        <h1 className = "mb-10 text-5xl font-semibold text-[#001529] text-center" >
+        Exercises that help you get in shape { " " } </h1>{" "} <center >
+        <div className = "flex  justify-center gap-3 items-center w-[50%] " >
+        <Input onChange = {
             (e) => setIsInput(e.target.value) }
         placeholder = "Search specific muscles ex.biceps" /
         >
-        <
-        Button onClick = { handleClick } > Search < /Button>{" "} <
-        /div>{" "} <
-        /center>{" "} {
+        <Button onClick = { handleClick } > Search </Button>{" "} </div>{" "} </center>{" "} {
             isExercise.length > 0 &&
-                isExercise.map((item, index) => ( <
-                    div className = ""
+                isExercise.map((item, index) => ( <div className = ""
                     key = { index } >
-                    <
-                    h3 className = "font-bold color-[#28267d] text-xl mt-4" > { " " } { item.name } { " " } <
-                    /h3>{" "} <
+                    <h3 className = "font-bold color-[#28267d] text-xl mt-4" > { " " } { item.name } { " " } </h3>{" "} <
                     hr className = "my-2 h-3 color-[#cccce7]" / >
+                    <div >
                     <
-                    div >
+                    h4 className = "font-bold mt-2" > Equipment: { item.equipment }  </h4>{" "} <div className = "flex gap-3" >
                     <
-                    h4 className = "font-bold mt-2" > Equipment: { item.equipment } < /h4>{" "} <
-                    div className = "flex gap-3" >
-                    <
-                    h4 className = "font-bold mt-2" > Targeted Muscles: < /h4>{" "} {
-                        item.muscles_targeted.map((muscle, idx) => ( <
-                            h4 key = { idx }
-                            className = "font-bold mt-2" > { " " } { muscle }, { " " } <
-                            /h4>
+                    h4 className = "font-bold mt-2" > Targeted Muscles: </h4>{" "} {
+                        item.muscles_targeted.map((muscle, idx) => ( <h4 key = { idx }
+                            className = "font-bold mt-2" > { " " } { muscle }, { " " } </h4>
                         ))
-                    } { " " } <
-                    /div>{" "} <
-                    h4 className = "font-bold mt-2" > Instructions: < /h4>{" "} {
-                        item.instructions.map((instruction, idx) => ( <
-                            p key = { idx }
-                            className = "text-justify" > { " " } { instruction } { " " } <
-                            /p>
+                    } { " " } </div>{" "} <h4 className = "font-bold mt-2" > Instructions: </h4>{" "} {
+                        item.instructions.map((instruction, idx) => ( <p key = { idx }
+                            className = "text-justify" > { " " } { instruction } { " " } </p>
                         ))
-                    } { " " } <
-                    /div>{" "} <
-                    /div>
+                    } { " " } </div>{" "} </div>
                 ))
-        } { " " } <
-        /div>
+        } { " " } </div>
     );
 }
 
