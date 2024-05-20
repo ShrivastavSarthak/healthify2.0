@@ -137,6 +137,7 @@ const Doctors = () => {
         /center>{" "} <
         /div>{" "} <
         /Modal>{" "} <
+
         Modal title = "Doctor's details"
         visible = { isViewMoreModalVisible }
         onCancel = {
@@ -150,6 +151,7 @@ const Doctors = () => {
                 /Button>,
             ]
         } >
+
         <
         Avatar size = "large" / >
         <

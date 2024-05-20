@@ -13,6 +13,11 @@ import Diet from "./pages/diet";
 import Articles from "./pages/articles";
 import FoodRecipe from "./pages/foodRecipe";
 import { Healthyaging } from "./pages/healthyaging";
+import BmrCalculator from "./pages/bmrCalculator";
+import FatCalculator from "./pages/fatCalculator";
+import BmiCalculator from "./pages/bmiCalculator";
+import WaterCalculator from "./components/dashBoard/waterConsumption";
+import FitnessCalculator from "./pages/fitnessCalc";
 // import Auth from "./pages/Auth";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +50,11 @@ function App() {
         <Route path="/dietandweight" element={<Diet />} />{" "}
         <Route path="/dietmanage" element={<FoodRecipe/>} />
         <Route path="/healthyaging" element={<Healthyaging/>} />
+        <Route path="/bmrcalc" element={<BmrCalculator/>} />
+        <Route path="/fatcalc" element={<FatCalculator/>} />
+        <Route path="/bmicalc" element={<BmiCalculator/>} />
+        <Route path="/watercalc" element={<WaterCalculator/>} />
+        <Route path="/fitnesstracker" element={<FitnessCalculator/>} />
 
         <Route path="/articles" element={<Articles />} />{" "}
         <Route path="*" element={<Navigate to="/" replace />} />{" "}
