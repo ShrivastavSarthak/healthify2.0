@@ -117,7 +117,8 @@ function ExercisePage() {
         }
     };
 
-    return ( <div className = "container mx-auto my-[6%]" >
+    return ( 
+    <div className = "container mx-auto my-[6%]" >
         <h1 className = "mb-10 text-5xl font-semibold text-[#001529] text-center" >
         Exercises that help you get in shape { " " } </h1>{" "} <center >
         <div className = "flex  justify-center gap-3 items-center w-[50%] " >

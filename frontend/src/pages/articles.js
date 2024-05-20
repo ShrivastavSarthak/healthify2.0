@@ -1,37 +1,51 @@
-import { Button, Input } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
-
+import { useEffect } from "react";
 const Articles = () => {
-    const [isInput, setIsInput] = useState("");
-
-    const handleClick = async() => {
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const fetchNews = async () => {
         try {
-            const response = await axios.get("enter the api" + isInput, {
-                headers: { "X-Api-Key": "uVt2fmKMtZ0lLnwZz0nT+g==PkCKLquVaz3xOBUl" },
-            });
-            //  setIsExercise(response.data);
-            // console.log("this is the response", isExercise);
+          const response = await axios.get(
+            'https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=1fd3f0fa8363490ea9cae2fbcd43f3ce'
+          );
+          setArticles(response.data.articles);
         } catch (error) {
-            console.error("Error fetching data:", error);
+          setError(error);
+        } finally {
+          setLoading(false);
         }
-    };
+      };
+  
+      fetchNews();
+    }, []);
+  
+    if (loading) return <div className="text-center mt-5">Loading...</div>;
+    if (error) return <div className="text-center mt-5">Error fetching news: {error.message}</div>;
 
     return (
-         <div className = "container mx-auto mt-[10%] " >
-        <h1 className = "text-5xl font-semibold text-[#001529] text-center" > { " " }
-        Update yourself with the best knowledgeable articles. { " " } </h1>{" "} <
-        h1 className = "text-lg mb-3 mt-1 font-extrabold text-[#001529] text-center" > { " " }
-        Just search here { " " } </h1>{" "} <
-        center >
-        <
-        div className = "flex  justify-center gap-3 items-center w-[50%] " >
-        <
-        Input onChange = {
-            (e) => setIsInput(e.target.value) }
-        placeholder = "Search specific muscles ex.biceps" /
-        >
-        <Button onClick = { handleClick } > Search </Button> </div>{" "} </center>{" "} </div>
+        <div className="container pt-5">
+        <h1 className="mb-4">Health News</h1>
+        <div className="row">
+          {articles.map((article, index) => (
+            <div className="col-md-4 mb-4" key={index}>
+              <div className="card h-100">
+                <img src={article.urlToImage} className="card-img-top" alt={article.title} />
+                <div className="card-body">
+                  <h5 className="card-title">{article.title}</h5>
+                  <p className="card-text">{article.description}</p>
+                  <a href={article.url} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Read More
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     );
 };
 
