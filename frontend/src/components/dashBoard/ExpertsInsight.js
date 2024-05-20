@@ -3,8 +3,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { UserOutlined } from "@ant-design/icons";
 import { Player } from "video-react";
+import { useNavigate } from "react-router-dom";
 
 function ExpertsInsight() {
+    const navigate = useNavigate();
+
     return ( <
         div className = "mt-8 bg-[#001529] py-5" >
         <
@@ -44,13 +47,15 @@ function ExpertsInsight() {
         <
         div className = "py-3" >
         <
-        Player playsInline fluid = { true }
-        aspectRatio = "16:9"
-        autoPlay = { true } >
-        <
-        source src = "https://media.w3.org/2010/05/sintel/trailer_hd.mp4" / >
-        <
-        /Player>{" "} <
+        iframe width = "560"
+        height = "315"
+        src = "https://www.youtube.com/embed/IlCYcvC75uQ?si=anpSVVhnsh7q0BDM"
+        title = "YouTube video player"
+        frameborder = "0"
+        allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy = "strict-origin-when-cross-origin"
+        allowfullscreen >
+        < /iframe>{" "} <
         /div>{" "} <
         div className = "flex " >
         <
@@ -62,7 +67,10 @@ function ExpertsInsight() {
         Experience a virtual tour of our hospital through an engaging video showcase.Immerse yourself in our state - of - the - art facilities, compassionate staff, and cutting - edge medical technology.From the moment you step through our doors, you 'll
         witness the dedication to exceptional patient care and the commitment to your well - being.Join us on this journey and discover why our hospital is your trusted healthcare partner. { " " } <
         /p>{" "} <
-        button className = "  w-full py-4  rounded-xl font-bold text-lg bg-slate-200 transition duration-300 ease-in-out  hover:bg-[#F5C23B] " > { " " }
+        button onClick = {
+            () => navigate("/doctors") }
+        className = "  w-full py-4  rounded-xl font-bold text-lg bg-slate-200 transition duration-300 ease-in-out  hover:bg-[#F5C23B] " >
+        { " " }
         Book Appointment Now { " " } <
         /button>{" "} <
         /div>{" "} <
