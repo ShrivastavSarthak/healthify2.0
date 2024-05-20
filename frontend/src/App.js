@@ -15,91 +15,61 @@ import FoodRecipe from "./pages/foodRecipe";
 import { Healthyaging } from "./pages/healthyaging";
 // import Auth from "./pages/Auth";
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const login = useCallback(() => {
-        const isToken = localStorage.getItem("token");
-        if (isToken) {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
-    const logout = useCallback(() => {
-        const isToken = localStorage.getItem("token");
-        console.log("this is the token", isToken);
-        if (!isToken) {
-            setIsLoggedIn(false);
-        }
-    }, []);
-
-    let route;
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-        route = ( <
-            Routes >
-            <
-            Route path = "/dashboard"
-            element = { < UserPage / > }
-            />{" "} <
-            Route path = "/appointment"
-            element = { < Appointment / > }
-            />{" "} <
-            Route path = "/doctors"
-            element = { < DoctorPage / > }
-            />{" "} <
-            Route path = "/exercise"
-            element = { < ExercisePage / > }
-            />{" "} <
-            Route path = "/dietandweight"
-            element = { < Diet / > }
-            />{" "} <
-            Route path = "/dietmanage"
-            element = { < FoodRecipe / > }
-            />{" "} <
-            Route path = "/healthyaging"
-            element = { < Healthyaging / > }
-            /> <
-            Route path = "/articles"
-            element = { < Articles / > }
-            />{" "} <
-            Route path = "*"
-            element = { < Navigate to = "/"
-                replace / > }
-            />{" "} <
-            /Routes>
-        );
-    } else {
-        route = ( <
-            Routes >
-            <
-            Route path = "/"
-            element = { < Home / > }
-            exact / >
-            <
-            Route path = "*"
-            element = { < Navigate to = "/"
-                replace / > }
-            />{" "} <
-            /Routes>
-        );
+  const login = useCallback(() => {
+    const isToken = localStorage.getItem("token");
+    if (isToken) {
+      setIsLoggedIn(true);
     }
+  }, []);
 
-    return ( <
-        AuthContext.Provider value = {
-            {
-                isLoggedIn: isLoggedIn,
-                login: login,
-                logout: logout,
-            }
-        } >
-        <
-        BrowserRouter >
-        <
-        Navbar / > { route } < Mainfooter / >
-        <
-        /BrowserRouter>{" "} <
-        /AuthContext.Provider>
+  const logout = useCallback(() => {
+    const isToken = localStorage.getItem("token");
+    console.log("this is the token", isToken);
+    if (!isToken) {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  let route;
+  console.log(isLoggedIn);
+  if (isLoggedIn) {
+    route = (
+      <Routes>
+        <Route path="/dashboard" element={<UserPage />} />{" "}
+        <Route path="/appointment" element={<Appointment />} />{" "}
+        <Route path="/doctors" element={<DoctorPage />} />{" "}
+        <Route path="/exercise" element={<ExercisePage />} />{" "}
+        <Route path="/dietandweight" element={<Diet />} />{" "}
+        <Route path="/dietmanage" element={<FoodRecipe />} />{" "}
+        <Route path="/healthyaging" element={<Healthyaging />} />{" "}
+        <Route path="/articles" element={<Articles />} />{" "}
+        <Route path="*" element={<Navigate to="/" replace />} />{" "}
+      </Routes>
     );
+  } else {
+    route = (
+      <Routes>
+        <Route path="/" element={<Home />} exact />
+        <Route path="*" element={<Navigate to="/" replace />} />{" "}
+      </Routes>
+    );
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        login: login,
+        logout: logout,
+      }}
+    >
+      <BrowserRouter>
+        <Navbar /> {route} <Mainfooter />
+      </BrowserRouter>{" "}
+    </AuthContext.Provider>
+  );
 }
 
 export default App;

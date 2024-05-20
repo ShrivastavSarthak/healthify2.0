@@ -27,7 +27,7 @@ const data = [
     title: "Fitness",
     Image:
       "https://plus.unsplash.com/premium_vector-1714663293500-874408dcd60c?bg=FFFFFF&w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGZpdG5lc3MlMjBhbmQlMjBleGVjaXNlfGVufDB8fDB8fHww",
-    url: "/exercise",
+    url: "/fitnesstracker",
   },
 ];
 
