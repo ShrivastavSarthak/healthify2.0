@@ -2,6 +2,7 @@ import { Avatar, Button, DatePicker, Input, Modal } from "antd";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import Appointment from "../appointment/Appointment";
+import { UserOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
@@ -63,6 +64,7 @@ const Doctors = () => {
 
     const handleViewMoreClick = (doc) => {
         setSelectedDoctor(doc);
+        console.log(selectedDoctor.fullName);
         setViewMoreModalVisible(true);
     };
 
@@ -84,8 +86,9 @@ const Doctors = () => {
                     <
                     center >
                     <
-                    Avatar size = "large" / >
-                    <
+                    Avatar size = "large"
+                    icon = { < UserOutlined / > }
+                    />{" "} <
                     h4 className = "mt-2" > Name: { item.fullName } < /h4>{" "} <
                     h4 className = "mt-2" > Specialist: { item.specialization } < /h4>{" "} <
                     h4 className = "mt-2" > Year of Exp: { item.exp } < /h4>{" "} <
@@ -151,11 +154,13 @@ const Doctors = () => {
             ]
         } >
         <
-        Avatar size = "large" / >
-        <
-        h4 className = "mt-2" > Name: fullName < /h4>{" "} <
-        h4 className = "mt-2" > Specialist: specialization < /h4>{" "} <
-        h4 className = "mt-2" > Year of Exp: exp < /h4>{" "} <
+        Avatar size = "large"
+        icon = { < UserOutlined / > }
+        />{" "} <
+        h4 className = "mt-2" > Name: { selectedDoctor.fullName } < /h4>{" "} <
+        h4 className = "mt-2" > Specialist: { selectedDoctor.specialization } < /h4>{" "} <
+        h4 className = "mt-2" > Year of Exp: { selectedDoctor.exp } < /h4>{" "} <
+        h4 className = "mt-2" > Working hours: { selectedDoctor.workingHrs } < /h4>{" "} <
         /Modal>{" "} <
         /Fragment>
     );
