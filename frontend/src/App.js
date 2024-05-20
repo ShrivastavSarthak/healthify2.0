@@ -11,6 +11,8 @@ import Appointment from "./pages/Appointment";
 import DoctorPage from "./pages/Doctor.page";
 import Diet from "./pages/diet";
 import Articles from "./pages/articles";
+import FoodRecipe from "./pages/foodRecipe";
+import { Healthyaging } from "./pages/healthyaging";
 // import Auth from "./pages/Auth";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,6 +43,9 @@ function App() {
         <Route path="/doctors" element={<DoctorPage />} />{" "}
         <Route path="/exercise" element={<ExercisePage />} />{" "}
         <Route path="/dietandweight" element={<Diet />} />{" "}
+        <Route path="/dietmanage" element={<FoodRecipe/>} />
+        <Route path="/healthyaging" element={<Healthyaging/>} />
+
         <Route path="/articles" element={<Articles />} />{" "}
         <Route path="*" element={<Navigate to="/" replace />} />{" "}
       </Routes>
