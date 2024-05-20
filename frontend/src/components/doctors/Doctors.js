@@ -1,11 +1,49 @@
-import { Avatar, Button } from "antd";
+import { Avatar, Button, DatePicker, Input, Modal } from "antd";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
+import Appointment from "../appointment/Appointment";
+
+const { TextArea } = Input;
 
 const Doctors = () => {
     const [isData, setIsData] = useState([]);
-    const [isAppointment, setIsAppointment] = useState(false);
-    const [isViewMore, setViewMore] = useState(false);
+    const [isAppointmentModalVisible, setAppointmentModalVisible] =
+    useState(false);
+    const [isViewMoreModalVisible, setViewMoreModalVisible] = useState(false);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+
+    const userId = localStorage.getItem("Id");
+
+    const [formData, setFormData] = useState({
+        patient: userId,
+        doctor: null,
+        date: null,
+        reason: "",
+    });
+
+    const handleDateChange = (date) => {
+        setFormData({...formData, date });
+    };
+
+    const handleReasonChange = (e) => {
+        setFormData({...formData, reason: e.target.value });
+    };
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        console.log(formData);
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/api/v1/appointment",
+                formData
+            );
+            console.log(response);
+            // Handle the response here
+        } catch (error) {
+            // Handle error
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
         const fetch = async() => {
@@ -13,10 +51,20 @@ const Doctors = () => {
                 "http://localhost:5000/api/v1/doctor/alldoctors"
             );
             setIsData(response.data.fetAllDoctors);
-            console.log(isData);
         };
         fetch();
-    }, [setIsData]);
+    }, []);
+
+    const handleBookAppointmentClick = (doc) => {
+        setSelectedDoctor(doc);
+        setAppointmentModalVisible(true);
+        setFormData({...formData, doctor: doc._id });
+    };
+
+    const handleViewMoreClick = (doc) => {
+        setSelectedDoctor(doc);
+        setViewMoreModalVisible(true);
+    };
 
     return ( <
         Fragment >
@@ -26,61 +74,84 @@ const Doctors = () => {
         h4 className = "font-bold color-[#28267d] text-xl mt-4" > { " " }
         Your doctors { " " } <
         /h4>{" "} <
-        hr className = " my-3 h-3 color-[#cccce7]" / >
+        hr className = "my-3 h-3 color-[#cccce7]" / >
         <
         div className = "gap-5 grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1" > { " " } {
             isData.map((item, index) => {
                 return ( <
                     div key = { index }
-                    className = "p-3 rounded-lg shadow-md border-gray-400 border-r-2 " >
+                    className = "p-3 rounded-lg shadow-md border-gray-400 border-r-2" >
                     <
                     center >
                     <
                     Avatar size = "large" / >
                     <
                     h4 className = "mt-2" > Name: { item.fullName } < /h4>{" "} <
-                    h4 className = "mt-2" > specialist: { item.specialization } < /h4>{" "} <
-                    h4 className = "mt-2" > Year of exp. { item.exp } < /h4>{" "} <
+                    h4 className = "mt-2" > Specialist: { item.specialization } < /h4>{" "} <
+                    h4 className = "mt-2" > Year of Exp: { item.exp } < /h4>{" "} <
                     /center>{" "} <
                     div className = "flex justify-between mt-2" >
                     <
-                    Button > Book appointment < /Button>{" "} <
-                    Button > View more < /Button>{" "} <
+                    Button onClick = {
+                        () => handleBookAppointmentClick(item) } >
+                    Book appointment { " " } <
+                    /Button>{" "} <
+                    Button onClick = {
+                        () => handleViewMoreClick(item) } >
+                    View more { " " } <
+                    /Button>{" "} <
                     /div>{" "} <
                     /div>
                 );
             })
         } { " " } <
         /div>{" "} <
-        h4 className = "font-bold color-[#28267d] text-xl mt-4" > { " " }
-        New doctors { " " } <
-        /h4>{" "} <
-        hr className = " my-3 h-3 color-[#cccce7]" / >
+        /div>{" "} <
+        Modal title = "Book Appointment"
+        visible = { isAppointmentModalVisible }
+        onCancel = {
+            () => setAppointmentModalVisible(false) } >
         <
-        div className = "gap-5 grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1" > { " " } {
-            new Array(3).fill(0).map((item, index) => {
-                return ( <
-                    div className = "p-3 rounded-lg shadow-md border-gray-400 border-r-2 " >
-                    <
-                    center >
-                    <
-                    Avatar size = "large" / >
-                    <
-                    h4 className = "mt-2" > Doctor 's Name</h4>{" "} <
-                    h4 className = "mt-2" > specialist < /h4>{" "} <
-                    h4 className = "mt-2" > Year of exp. < /h4>{" "} <
-                    /center>{" "} <
-                    div className = "flex justify-between mt-2" >
-                    <
-                    Button > Book appointment < /Button>{" "} <
-                    Button > View more < /Button>{" "} <
-                    /div>{" "} <
-                    /div>
-                );
-            })
-        } { " " } <
+        div className = "my-[5%]" >
+        <
+        center >
+        <
+        form onSubmit = { handleSubmit } >
+        <
+        div className = "flex flex-col justify-start gap-3" >
+        <
+        DatePicker onChange = { handleDateChange }
+        />{" "} <
+        TextArea rows = { 4 }
+        onChange = { handleReasonChange }
+        placeholder = "enter the reason" /
+        >
+        <
+        Button type = "primary"
+        htmlType = "submit"
+        className = "mt-3" >
+        Submit { " " } <
+        /Button>{" "} <
         /div>{" "} <
+        /form>{" "} <
+        /center>{" "} <
         /div>{" "} <
+        /Modal>{" "} <
+        Modal title = "View More"
+        visible = { isViewMoreModalVisible }
+        onCancel = {
+            () => setViewMoreModalVisible(false) }
+        footer = {
+            [ <
+                Button key = "close"
+                onClick = {
+                    () => setViewMoreModalVisible(false) } >
+                Close { " " } <
+                /Button>,
+            ]
+        } >
+        { /* You can display additional information about the selected doctor here */ } { " " } { /* Use selectedDoctor to access the selected doctor's information */ } { " " } <
+        /Modal>{" "} <
         /Fragment>
     );
 };
