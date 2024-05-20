@@ -16,14 +16,15 @@ const CheckAppointment = () => {
         setIsModalOpen(false);
     };
 
-    const id = localStorage.getItem("Id");
+    const userId = localStorage.getItem("Id");
 
+    console.log(userId);
     useEffect(() => {
         const fetch = async() => {
             await axios
-                .get("http://localhost:5000/api/v1/get-appointments", id)
+                .post("http://localhost:5000/api/v1/get-appointments", userId)
                 .then(function(response) {
-                    console.log(response.data);
+                    console.log(response.data.appointments);
                 });
         };
 
