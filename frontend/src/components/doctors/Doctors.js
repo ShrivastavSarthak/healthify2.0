@@ -137,7 +137,8 @@ const Doctors = () => {
         /center>{" "} <
         /div>{" "} <
         /Modal>{" "} <
-        Modal title = "View More"
+
+        Modal title = "Doctor's details"
         visible = { isViewMoreModalVisible }
         onCancel = {
             () => setViewMoreModalVisible(false) }
@@ -150,7 +151,13 @@ const Doctors = () => {
                 /Button>,
             ]
         } >
-        { /* You can display additional information about the selected doctor here */ } { " " } { /* Use selectedDoctor to access the selected doctor's information */ } { " " } <
+
+        <
+        Avatar size = "large" / >
+        <
+        h4 className = "mt-2" > Name: fullName < /h4>{" "} <
+        h4 className = "mt-2" > Specialist: specialization < /h4>{" "} <
+        h4 className = "mt-2" > Year of Exp: exp < /h4>{" "} <
         /Modal>{" "} <
         /Fragment>
     );
