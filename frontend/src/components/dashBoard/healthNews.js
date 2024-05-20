@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const healthNewsData = [
   {
-    text: "What does old age Starts? Its Depends on who you Ask",
+    text: "Stay informed, Stay healthy",
   },
   {
-    text: "Bird flue Was Circulating 4 Months Before Detection",
+    text: "Your daily dose of health insights and news.",
   },
   {
-    text: "Cholesterol Experts Say Everyone Needs little Known Blood test. ",
+    text: "Stay updated with the latest health trends and news.Your gateway to better health. ",
   },
 ];
 

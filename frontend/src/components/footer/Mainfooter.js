@@ -13,7 +13,7 @@ const Mainfooter = () => {
                     <Button shape='circle' icon={<InstagramFilled />} />
                 </Space>
             </Flex>
-            <p>HealthCare application @ 2023</p>
+            <p>HealthCare application @ 2024</p>
         </Footer>
     )
 }
