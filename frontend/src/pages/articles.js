@@ -17,15 +17,12 @@ const Articles = () => {
         }
     };
 
-    return ( <
-        div className = "container mx-auto mt-[10%] " >
-        <
-        h1 className = "text-5xl font-semibold text-[#001529] text-center" > { " " }
-        Update yourself with the best knowledgeable articles. { " " } <
-        /h1>{" "} <
+    return (
+         <div className = "container mx-auto mt-[10%] " >
+        <h1 className = "text-5xl font-semibold text-[#001529] text-center" > { " " }
+        Update yourself with the best knowledgeable articles. { " " } </h1>{" "} <
         h1 className = "text-lg mb-3 mt-1 font-extrabold text-[#001529] text-center" > { " " }
-        Just search here { " " } <
-        /h1>{" "} <
+        Just search here { " " } </h1>{" "} <
         center >
         <
         div className = "flex  justify-center gap-3 items-center w-[50%] " >
@@ -34,11 +31,7 @@ const Articles = () => {
             (e) => setIsInput(e.target.value) }
         placeholder = "Search specific muscles ex.biceps" /
         >
-        <
-        Button onClick = { handleClick } > Search < /Button>{" "} <
-        /div>{" "} <
-        /center>{" "} <
-        /div>
+        <Button onClick = { handleClick } > Search </Button> </div>{" "} </center>{" "} </div>
     );
 };
 

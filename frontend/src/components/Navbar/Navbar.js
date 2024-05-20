@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <>
       <Layout className="fixed-top " style={{ background: colorBgContainer }}>
-        <Header className={mobileView ? "d-flex p-0" : " navbar p-0  my-auto "}>
+        <Header className={mobileView ? "d-flex p-0" : " navbar p-0  my-auto mb-1 "}>
           <NavLinks />
           <div className="ms-auto p-2">
             {" "}

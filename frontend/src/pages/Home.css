@@ -8,9 +8,9 @@
     align-items: center;
     justify-content: center;   
 }
-.intro{
+/* .intro{
     font-size: larger;
-}
+} */
 @media screen and (max-width: 750px) {
   .intro{
     font-weight: 100;
