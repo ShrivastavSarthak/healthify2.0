@@ -1,3 +1,4 @@
+import nodemailer from "nodemailer";
 import { DoctorUser } from "../models/doctor.modal.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
@@ -22,12 +23,37 @@ export const docSignup = asyncHandler(async(req, res) => {
         workingHrs,
     });
 
+    const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+
+    if (!emailRegex.test(newDoctor.email)) {
+        return res.status(400).json({ message: "Invalid email" });
+    }
+
+
+
     const user = await DoctorUser.findOne({ email });
 
     if (user) {
         return res.status(400).json({ message: "User already exists" });
     }
     await newDoctor.save();
+
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "sarthakkumar2026@gmail.com",
+            pass: "add your app password",
+        },
+    });
+
+    const doctorFirstSignup = {
+        from: "sarthakkumar2026@gmail.com",
+        to: newDoctor.email,
+        subject: "Signup Successfully",
+        text: `Hi ${newDoctor.fullName}, thanks for choosing up, And you login successfully.`,
+    };
+
+    await transporter.sendMail(doctorFirstSignup);
 
     res.status(201).json({
         message: "User created successfully",
