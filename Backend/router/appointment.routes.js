@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.route("/appointment").post(bookAppointment);
-router.route("/get-appointments").post(fetchAllAppointmentsByPatients);
+router.route("/get-appointments/:id").get(fetchAllAppointmentsByPatients);
 
 router.route("/get-appointment-id").get(fetchAppointmentById);
 router.route("/update-appointment/:id").patch(updateAppointment);

@@ -45,10 +45,12 @@ export const doctorSignIn = asyncHandler(async(req, res) => {
     if (!isMatch) {
         return res.status(400).json({ message: "Incorrect password" });
     }
+    const id = user._id;
     const token = user.generateAccessToken();
     res.status(200).json({
         message: "User logged in successfully",
         token: token,
+        id: id,
     });
 });
 

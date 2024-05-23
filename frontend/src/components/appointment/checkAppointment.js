@@ -22,7 +22,7 @@ const CheckAppointment = () => {
     useEffect(() => {
         const fetch = async() => {
             await axios
-                .post("http://localhost:5000/api/v1/get-appointments", userId)
+                .get(`http://localhost:5000/api/v1/get-appointments/${userId}`)
                 .then(function(response) {
                     console.log(response.data.appointments);
                 });
