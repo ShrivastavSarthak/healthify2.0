@@ -8,7 +8,7 @@ export const bookAppointment = asyncHandler(async(req, res) => {
     const { patient, doctor, date, reason, name, phoneNo, email } = req.body;
 
     const existPatient = await PatientUser.findById(patient);
-    const existDoctor = await DoctorUser.findById(doctor);
+    const existDoctor = await DoctorUser.findById({ _id: doctor }, { password: 0 });
 
     if (!existPatient || !existDoctor) {
         res.status(404).json({ message: "Patient or doctor not found !!" });
@@ -34,18 +34,25 @@ export const bookAppointment = asyncHandler(async(req, res) => {
         service: "Gmail",
         auth: {
             user: "sarthakkumar2026@gmail.com",
-            pass: "ewpluxrfellojpor",
+            pass: "add your app password",
         },
     });
 
-    const mailOptions = {
+    const doctorMail = {
+        from: "sarthakkumar2026@gmail.com",
+        to: existDoctor.email,
+        subject: "Appointment Booked",
+        text: `Hi ${existDoctor.fullName}, your appointment has been booked on ${req.body.date} with ${existPatient.fullName} with reason ${req.body.reason}.`,
+    };
+    const patientMail = {
         from: "sarthakkumar2026@gmail.com",
         to: req.body.email,
         subject: "Appointment Booked",
         text: `Hi ${req.body.name}, your appointment has been booked on ${req.body.date} at ${req.body.doctorName} with reason ${req.body.reason}.`,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(patientMail);
+    await transporter.sendMail(doctorMail);
 
     await newAppointment.save();
 
