@@ -6,6 +6,9 @@ const { TextArea } = Input;
 
 const Appointment = ({ doctorID }) => {
     const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
         date: null,
         reason: "",
     });
@@ -34,6 +37,13 @@ const Appointment = ({ doctorID }) => {
         <
         div className = "flex flex-col justify-start gap-3" >
         <
+        div className = "flex gap-5" >
+        <
+        Input placeholder = "Cause of illness" / >
+        <
+        Input placeholder = "Phone number" / >
+        <
+        /div>{" "} <
         DatePicker onChange = { handleDateChange }
         />{" "} <
         TextArea rows = { 4 }

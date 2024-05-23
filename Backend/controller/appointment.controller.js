@@ -1,10 +1,11 @@
+import nodemailer from "nodemailer";
 import { Appointments } from "../models/appointment.models.js";
 import { DoctorUser } from "../models/doctor.modal.js";
 import { PatientUser } from "../models/patient.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const bookAppointment = asyncHandler(async(req, res) => {
-    const { patient, doctor, date, reason } = req.body;
+    const { patient, doctor, date, reason, name, phoneNo, email } = req.body;
 
     const existPatient = await PatientUser.findById(patient);
     const existDoctor = await DoctorUser.findById(doctor);
@@ -13,12 +14,38 @@ export const bookAppointment = asyncHandler(async(req, res) => {
         res.status(404).json({ message: "Patient or doctor not found !!" });
     }
 
+    const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Invalid email" });
+    }
+
     const newAppointment = new Appointments({
         patient,
+        name,
+        phoneNo,
+        email,
         doctor,
         date,
         reason,
     });
+
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "sarthakkumar2026@gmail.com",
+            pass: "ewpluxrfellojpor",
+        },
+    });
+
+    const mailOptions = {
+        from: "sarthakkumar2026@gmail.com",
+        to: req.body.email,
+        subject: "Appointment Booked",
+        text: `Hi ${req.body.name}, your appointment has been booked on ${req.body.date} at ${req.body.doctorName} with reason ${req.body.reason}.`,
+    };
+
+    await transporter.sendMail(mailOptions);
 
     await newAppointment.save();
 
@@ -38,13 +65,17 @@ export const fetchAppointmentById = asyncHandler(async(req, res) => {
 });
 
 export const fetchAllAppointmentsByPatients = asyncHandler(async(req, res) => {
-    const { userId } = req.body;
-    const appointments = await Appointments.find({ patient: userId });
+    const { id } = req.params;
+    console.log(id);
+    const appointments = await Appointments.find({ patient: id });
 
-    if (!appointments) {
+    if (appointments.length === 0) {
         res.status(404).json({ message: "Sorry user don't have any appointment" });
+    } else {
+        res
+            .status(200)
+            .json({ message: "Appointments successfully", appointments });
     }
-    res.status(200).json({ message: "Appointments successfully", appointments });
 });
 
 export const updateAppointment = asyncHandler(async(req, res) => {
