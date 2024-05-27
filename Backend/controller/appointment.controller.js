@@ -3,6 +3,7 @@ import { Appointments } from "../models/appointment.models.js";
 import { DoctorUser } from "../models/doctor.modal.js";
 import { PatientUser } from "../models/patient.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { Transporter } from "../utils/transporter.js";
 
 export const bookAppointment = asyncHandler(async(req, res) => {
     const { patient, doctor, date, reason, name, phoneNo, email } = req.body;
@@ -30,13 +31,7 @@ export const bookAppointment = asyncHandler(async(req, res) => {
         reason,
     });
 
-    const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-            user: "sarthakkumar2026@gmail.com",
-            pass: "ewpluxrfellojpor",
-        },
-    });
+
 
     const doctorMail = {
         from: "sarthakkumar2026@gmail.com",
@@ -51,8 +46,8 @@ export const bookAppointment = asyncHandler(async(req, res) => {
         text: `Hi ${req.body.name}, your appointment has been booked on ${req.body.date} at ${req.body.doctorName} with reason ${req.body.reason}.`,
     };
 
-    await transporter.sendMail(patientMail);
-    await transporter.sendMail(doctorMail);
+    await Transporter.sendMail(patientMail);
+    await Transporter.sendMail(doctorMail);
 
     await newAppointment.save();
 
@@ -85,7 +80,6 @@ export const fetchAllAppointmentsByPatients = asyncHandler(async(req, res) => {
     }
 });
 
-
 export const fetchAllAppointmentsByDoctor = asyncHandler(async(req, res) => {
     const { id } = req.params;
     console.log(id);
@@ -113,10 +107,25 @@ export const updateAppointment = asyncHandler(async(req, res) => {
         }, { new: true }
     );
 
+    console.log(updateAppointment);
+
     if (!updateAppointment)
         return res.status(400).json({ message: "Appointment not found!!" });
 
-    return res
-        .status(400)
-        .json({ message: "Appointment update successfully ", updateAppointment });
+    const userdetails = await PatientUser.findById(updateAppointment.patient);
+
+    if (appointmentLink.length != 0) {
+        const appointmentLink = {
+            from: "sarthakkumar2026@gmail.com",
+            to: userdetails.email,
+            subject: "Appointment link",
+            text: `Hi ${userdetails.fullName},Your appointment is ${updateAppointment.status} on ${updateAppointment.date} your appointment link is ${updateAppointment.appointmentLink}`,
+        };
+
+        await Transporter.sendMail(appointmentLink);
+    }
+    return res.status(400).json({
+        message: "Appointment update successfully ",
+        updateAppointment,
+    });
 });
