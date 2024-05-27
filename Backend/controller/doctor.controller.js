@@ -42,7 +42,7 @@ export const docSignup = asyncHandler(async(req, res) => {
         service: "Gmail",
         auth: {
             user: "sarthakkumar2026@gmail.com",
-            pass: "add your app password",
+            pass: "ewpluxrfellojpor",
         },
     });
 
