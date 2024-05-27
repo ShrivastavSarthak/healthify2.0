@@ -85,6 +85,21 @@ export const fetchAllAppointmentsByPatients = asyncHandler(async(req, res) => {
     }
 });
 
+
+export const fetchAllAppointmentsByDoctor = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const appointments = await Appointments.find({ doctor: id });
+
+    if (appointments.length === 0) {
+        res.status(404).json({ message: "Sorry user don't have any appointment" });
+    } else {
+        res
+            .status(200)
+            .json({ message: "Appointments successfully", appointments });
+    }
+});
+
 export const updateAppointment = asyncHandler(async(req, res) => {
     const { id } = req.params;
     const { date, reason, appointmentLink, status } = req.body;

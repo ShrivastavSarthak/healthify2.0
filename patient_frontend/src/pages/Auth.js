@@ -15,36 +15,6 @@ import { AuthContext } from "../shared/context/auth-context";
 // import { usePatientLoginMutation } from "../lib/services/patient.service.js";
 import axios from "axios";
 
-const User_Data = [{
-        id: "u1",
-        name: "John",
-        email: "test@test.com",
-        password: "123456",
-        cpassword: "123456",
-    },
-    {
-        id: "u2",
-        name: "James",
-        email: "henry.billings.brown@examplepetstore.com",
-        password: "123456",
-        cpassword: "123456",
-    },
-    {
-        id: "u3",
-        name: "Bob",
-        email: "test@gmail.com",
-        password: "123456",
-        cpassword: "123456",
-    },
-    {
-        id: "u4",
-        name: "Michael",
-        email: "michael@examplepetstore.com",
-        password: "123456",
-        cpassword: "123456",
-    },
-];
-
 const Auth = () => {
         // const [loginMutation] = usePatientLoginMutation();
 
@@ -67,6 +37,15 @@ const Auth = () => {
             inputBlurHandler: NameBlurHandler,
             reset: resetNameInput,
         } = userInput((value) => value.length >= 3);
+
+        const {
+            value: enterMobNo,
+            hasError: MobInputHasError,
+            isValid: enteredMobIsValid,
+            valueChangeHandler: MobChangeHandler,
+            inputBlurHandler: MobBlurHandler,
+            reset: resetMobInput,
+        } = userInput((value) => value.length == 10);
 
         const {
             value: enteredEmail,
@@ -96,13 +75,6 @@ const Auth = () => {
 
         const handleLoginSubmit = async(e) => {
             e.preventDefault();
-            let isValidUser = false;
-            let userId;
-            // const userData = {
-
-            // };
-
-            // console.log(userData);
             await axios
                 .post("http://localhost:5000/api/v1/patient/signin", {
                     email: enteredEmail,
@@ -116,21 +88,6 @@ const Auth = () => {
                     navigate("/dashboard");
                 });
 
-            // User_Data.find((user) => {
-            //   if (user.email === enteredEmail && user.password === enteredPassword) {
-            //     auth.login();
-            //     userId = user.id;
-            //     isValidUser = true;
-            //     return true;
-            //   }
-            //   return false;
-            // });
-            // if (isValidUser) {
-
-            // } else {
-            //   <Message mess="user is not authenticate." />;
-            // }
-
             resetNameInput();
             resetEmailInput();
             resetPasswordInput();
@@ -138,10 +95,22 @@ const Auth = () => {
             setIsOpen(false);
         };
 
-        const handleSignupSubmit = (e) => {
+        const handleSignupSubmit = async(e) => {
             e.preventDefault();
 
-            auth.login();
+            await axios
+                .post("http://localhost:5000/api/v1/patient/signup", {
+                    fullName: enteredName,
+                    email: enteredEmail,
+                    password: enteredPassword,
+                    mobNumber: enterMobNo,
+                })
+                .then(function(response) {
+                    console.log(response);
+                    navigate("/dashboard");
+                    auth.login();
+                });
+
             resetNameInput();
             resetEmailInput();
             resetPasswordInput();
@@ -195,6 +164,26 @@ const Auth = () => {
                 )
             } { " " } {
                 reg && NameInputHasError && ( <
+                    Message mess = { "name should be 3 words." }
+                    />
+                )
+            } { " " } {
+                reg && ( <
+                    Input value = { enterMobNo }
+                    onBlur = { MobBlurHandler }
+                    onChange = { MobChangeHandler }
+                    status = { MobInputHasError && "error" }
+                    className = "mb-3"
+                    size = "default size"
+                    placeholder = "Enter your mobile Number"
+                    type = "text"
+                    prefix = {
+                        MobInputHasError ? < ClockCircleOutlined / > : < UserOutlined / >
+                    }
+                    />
+                )
+            } { " " } {
+                reg && MobInputHasError && ( <
                     Message mess = { "name should be 3 words." }
                     />
                 )
