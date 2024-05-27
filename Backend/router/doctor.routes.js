@@ -6,5 +6,5 @@ const router = Router();
 router.route("/doctor/signup").post(docSignup);
 router.route("/doctor/signin").post(doctorSignIn);
 router.route("/doctor/alldoctors").get(getAllDoctors);
-router.route("/doctor/doctor").get(fetchDoctorById);
+router.route("/doctor/doctor/:id").get(fetchDoctorById);
 export default router;

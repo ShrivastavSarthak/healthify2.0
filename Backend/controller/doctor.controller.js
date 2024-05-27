@@ -42,7 +42,7 @@ export const docSignup = asyncHandler(async(req, res) => {
         service: "Gmail",
         auth: {
             user: "sarthakkumar2026@gmail.com",
-            pass: "add your app password",
+            pass: "ewpluxrfellojpor",
         },
     });
 
@@ -89,8 +89,8 @@ export const getAllDoctors = asyncHandler(async(req, res) => {
 });
 
 export const fetchDoctorById = asyncHandler(async(req, res) => {
-    const { id } = req.body;
-    const getDoctor = await DoctorUser.findById(id);
+    const { id } = req.params;
+    const getDoctor = await DoctorUser.findById(id, { password: 0 });
     if (!getDoctor) {
         res.status(404).json({ message: "Doctor not found" });
     }

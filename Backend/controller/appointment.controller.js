@@ -34,7 +34,7 @@ export const bookAppointment = asyncHandler(async(req, res) => {
         service: "Gmail",
         auth: {
             user: "sarthakkumar2026@gmail.com",
-            pass: "add your app password",
+            pass: "ewpluxrfellojpor",
         },
     });
 
@@ -75,6 +75,21 @@ export const fetchAllAppointmentsByPatients = asyncHandler(async(req, res) => {
     const { id } = req.params;
     console.log(id);
     const appointments = await Appointments.find({ patient: id });
+
+    if (appointments.length === 0) {
+        res.status(404).json({ message: "Sorry user don't have any appointment" });
+    } else {
+        res
+            .status(200)
+            .json({ message: "Appointments successfully", appointments });
+    }
+});
+
+
+export const fetchAllAppointmentsByDoctor = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const appointments = await Appointments.find({ doctor: id });
 
     if (appointments.length === 0) {
         res.status(404).json({ message: "Sorry user don't have any appointment" });
