@@ -11,7 +11,7 @@ const router = Router();
 
 router.route("/appointment").post(bookAppointment);
 router.route("/get-appointments/:id").get(fetchAllAppointmentsByPatients);
-router.route("/get-appointments/:id").get(fetchAllAppointmentsByDoctor);
+router.route("/get-doctor-appointments/:id").get(fetchAllAppointmentsByDoctor);
 
 router.route("/get-appointment-id").get(fetchAppointmentById);
 router.route("/update-appointment/:id").patch(updateAppointment);
